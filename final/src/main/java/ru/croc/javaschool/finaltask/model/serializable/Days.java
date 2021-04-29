@@ -1,4 +1,6 @@
-package ru.croc.javaschool.finaltask.model;
+package ru.croc.javaschool.finaltask.model.serializable;
+
+import ru.croc.javaschool.finaltask.model.db.Day;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

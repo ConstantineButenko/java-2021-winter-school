@@ -1,6 +1,7 @@
 package ru.croc.javaschool.finaltask.database.dbprovider;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
+import ru.croc.javaschool.finaltask.exceptionhandler.ExceptionHandler;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,6 +36,8 @@ public class DataSourceProvider {
                 this.properties.put((String) entry.getKey(), (String) entry.getValue());
             }
         } catch (Exception e) {
+            ExceptionHandler handler = new ExceptionHandler();
+            handler.handleException(e, "errorlog.txt");
             System.out.println("An error occured during loading properties");
         }
     }

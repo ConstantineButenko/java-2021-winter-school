@@ -1,7 +1,8 @@
 package ru.croc.javaschool.finaltask.xmlwriter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.exceptionhandler.ExceptionHandler;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 import ru.croc.javaschool.finaltask.xmlconverter.XMLConverter;
 
 import java.io.FileWriter;
@@ -25,7 +26,9 @@ public class XMLWriter {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(xml);
         } catch (IOException e) {
-            System.out.println("Something bad happened: " + e.getMessage());
+            ExceptionHandler handler = new ExceptionHandler();
+            handler.handleException(e, "errorlog.txt");
+            System.out.println("An error occured: " + e.getMessage());
         }
     }
 }

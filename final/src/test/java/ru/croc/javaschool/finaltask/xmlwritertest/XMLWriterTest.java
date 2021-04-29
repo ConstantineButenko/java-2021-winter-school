@@ -3,8 +3,8 @@ package ru.croc.javaschool.finaltask.xmlwritertest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 import ru.croc.javaschool.finaltask.xmlconverter.XMLConverter;
 import ru.croc.javaschool.finaltask.xmlwriter.XMLWriter;
 

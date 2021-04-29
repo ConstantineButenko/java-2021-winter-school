@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.finaltask.handler.DayHandler;
 import ru.croc.javaschool.finaltask.handler.DaysHandler;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 
 import java.time.LocalDate;
 import java.time.Month;

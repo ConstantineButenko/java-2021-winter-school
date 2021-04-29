@@ -1,8 +1,9 @@
 package ru.croc.javaschool.finaltask.database.repository;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.exceptionhandler.ExceptionHandler;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -39,7 +40,8 @@ public class DayRepository {
 
         private void initTable() {
             System.out.println(String.format("Start initializing %s table", TABLE_NAME));
-            try (Connection connection = dataSource.getConnection()) {
+            try (
+                    Connection connection = dataSource.getConnection()) {
                 Statement statement = connection.createStatement();
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
                 ResultSet resultSet = databaseMetaData.getTables(null, null,
@@ -58,10 +60,14 @@ public class DayRepository {
                                     + "pressure INTEGER"
                                     + ")");
                 }
+                statement.close();
+                resultSet.close();
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Error occurred during table initializing: " + e.getMessage());
+                ExceptionHandler handler = new ExceptionHandler();
+                handler.handleException(e, "errorlog.txt");
+                System.out.println("An error occured: " + e.getMessage());
             } finally {
+
                 System.out.println("================================================================================");
             }
         }
@@ -73,15 +79,18 @@ public class DayRepository {
 
     public void create(Day day) {
             String sqlQuery = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?)";
-            try (Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+            try (
+                    Connection connection = dataSource.getConnection();
+                    PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 statement.setInt(1, day.getId());
                 statement.setDate(2, Date.valueOf(day.getDate()));
                 statement.setFloat(3, day.getTemperature());
                 statement.setInt(4, day.getPressure());
                 statement.execute();
             } catch (SQLException e) {
-                e.printStackTrace();
+                ExceptionHandler handler = new ExceptionHandler();
+                handler.handleException(e, "errorlog.txt");
+                System.out.println("An error occured: " + e.getMessage());
             }
         }
 
@@ -94,8 +103,9 @@ public class DayRepository {
 
     public Days get(LocalDate from, LocalDate to) {
             String sqlQuery = "SELECT * FROM " + TABLE_NAME + " WHERE date BETWEEN ? AND ?";
-            try (Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+            try (
+                    Connection connection = dataSource.getConnection();
+                    PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 statement.setDate(1, Date.valueOf(from));
                 statement.setDate(2, Date.valueOf(to));
                 ResultSet resultSet = statement.executeQuery();
@@ -106,9 +116,12 @@ public class DayRepository {
                             resultSet.getFloat("temperature"),
                             resultSet.getInt("pressure")));
                 }
+                resultSet.close();
                 return new Days(days);
             } catch (SQLException e) {
-                System.out.println("Something bad happened: " + e.getMessage());
+                ExceptionHandler handler = new ExceptionHandler();
+                handler.handleException(e, "errorlog.txt");
+                System.out.println("An error occured: " + e.getMessage());
             }
             return new Days();
         }

@@ -1,7 +1,7 @@
 package ru.croc.javaschool.finaltask.handler;
 
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 
 /** Обработчик объекта класса Days
  *

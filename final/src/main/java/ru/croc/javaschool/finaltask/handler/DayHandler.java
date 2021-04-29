@@ -1,6 +1,6 @@
 package ru.croc.javaschool.finaltask.handler;
 
-import ru.croc.javaschool.finaltask.model.Day;
+import ru.croc.javaschool.finaltask.model.db.Day;
 
 import java.time.LocalDate;
 

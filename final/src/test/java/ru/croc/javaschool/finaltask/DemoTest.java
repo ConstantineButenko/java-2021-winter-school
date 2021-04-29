@@ -6,8 +6,8 @@ import ru.croc.javaschool.finaltask.database.dbprovider.DataSourceProvider;
 import ru.croc.javaschool.finaltask.database.repository.DayRepository;
 import ru.croc.javaschool.finaltask.database.service.DayRepositoryService;
 import ru.croc.javaschool.finaltask.handler.DaysHandler;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 import ru.croc.javaschool.finaltask.xmlconverter.XMLConverter;
 import ru.croc.javaschool.finaltask.xmlwriter.XMLWriter;
 
@@ -38,7 +38,7 @@ import java.util.Random;
 public class DemoTest {
     @Test
     public void demo() throws IOException {
-        /** Занесение в таблицу рандомизированных значений */
+        /* Занесение в таблицу рандомизированных значений */
 
         DayRepositoryService service = new DayRepositoryService(new DayRepository(new DataSourceProvider().
                 getDataSource()));
@@ -49,7 +49,7 @@ public class DemoTest {
                     random.nextInt() % 40 + ((float) random.nextInt() % 10) / 10,
                     (random.nextInt() % 400) + 400));
         }
-         /** Получение результата из базы данных и вывод списка объектов после обработки */
+         /* Получение результата из базы данных и вывод списка объектов после обработки */
 
         Days days = service.get(LocalDate.of(2021, Month.APRIL, 5),
                 LocalDate.of(2021, Month.APRIL, 20));
@@ -57,13 +57,13 @@ public class DemoTest {
             System.out.println(day);
         }
         System.out.println("========================================================================================");
-        /** Конвертация в формат XML и запись в файл */
+        /* Конвертация в формат XML и запись в файл */
 
         String xml = new XMLConverter().toXML(days);
         System.out.println(xml);
         XMLWriter writer = new XMLWriter();
         writer.convertAndWrite(days, "result.xml");
-        /** Чтение из файла и сравнение со строкой, полученной в результате работы программы */
+        /* Чтение из файла и сравнение со строкой, полученной в результате работы программы */
 
         String result = "";
         try (BufferedReader reader = new BufferedReader(new FileReader("result.xml"))) {

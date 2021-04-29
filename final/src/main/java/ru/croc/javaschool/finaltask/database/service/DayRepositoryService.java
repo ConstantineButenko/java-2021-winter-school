@@ -1,8 +1,8 @@
 package ru.croc.javaschool.finaltask.database.service;
 
 import ru.croc.javaschool.finaltask.database.repository.DayRepository;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 
 import java.time.LocalDate;
 

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.finaltask.database.dbprovider.DataSourceProvider;
 import ru.croc.javaschool.finaltask.database.repository.DayRepository;
 import ru.croc.javaschool.finaltask.database.service.DayRepositoryService;
-import ru.croc.javaschool.finaltask.model.Day;
-import ru.croc.javaschool.finaltask.model.Days;
+import ru.croc.javaschool.finaltask.model.db.Day;
+import ru.croc.javaschool.finaltask.model.serializable.Days;
 
 import java.io.IOException;
 import java.time.LocalDate;
